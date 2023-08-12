@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scboanda.demo.dao.YcsjDao">
+
+    <insert id="addHourYcsj" parameterType="java.util.Map">
+        insert into t_caiyun_ycsj_hour
+        (
+            id,stationId,zxrq,cjsj,ycsj,air_quality_aqi_value_usa,air_quality_aqi_value_chn,air_quality_pm25,cloudrate,dswrf,
+            humidity,pressure,precipitation,skycon,temperature,visibility,wind_direction,wind_speed
+        )
+        values
+        <foreach collection="list" item="line" separator=",">
+            (
+            #{line.id},#{line.stationId},#{line.zxrq},#{line.cjsj},#{line.ycsj},#{line.air_quality_aqi_value_usa},#{line.air_quality_aqi_value_chn},#{line.air_quality_pm25_value},
+            #{line.cloudrate_value},#{line.dswrf_value},#{line.humidity_value},
+            #{line.pressure_value},#{line.precipitation_value},#{line.skycon_value},#{line.temperature_value},
+            #{line.visibility_value},#{line.wind_direction},#{line.wind_speed}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteHourYcsj" parameterType="string">
+        delete from t_caiyun_ycsj_hour where cjsj &lt;= #{date}
+    </delete>
+
+
+
+    <select id="queryHourYcsj" resultType="Map">
+        select * from t_caiyun_ycsj_hour
+        where 1=1
+        <if test="siteId != null"> and stationId = #{siteId}</if>
+        <if test="startTime != null"> and zxrq &gt;= #{startTime}</if>
+        <if test="endTime != null"> and zxrq &lt;= #{endTime}</if>
+    </select>
+
+    <insert id="addDayYcsj" parameterType="java.util.Map">
+        insert into t_caiyun_ycsj_day
+        (
+        id,stationId,zxrq,cjsj,ycsj,air_quality_aqi_min_chn,air_quality_aqi_max_chn,air_quality_aqi_avg_chn,air_quality_aqi_min_usa,air_quality_aqi_max_usa,air_quality_aqi_avg_usa,
+        air_quality_pm25_min,air_quality_pm25_max,air_quality_pm25_avg,astro_sunrise_time,astro_sunset_time,cloudrate_min,cloudrate_max,cloudrate_avg,dswrf_min,dswrf_max,dswrf_avg,
+        humidity_min,humidity_max,humidity_avg,life_index_comfort_index,life_index_comfort_desc,life_index_carWashing_index,life_index_carWashing_desc,life_index_coldRisk_index,life_index_coldRisk_desc,
+        life_index_ultraviolet_index,life_index_ultraviolet_desc,life_index_dressing_index,life_index_dressing_desc,pressure_min,pressure_max,pressure_avg,precipitation_min,precipitation_max,precipitation_avg,
+        skycon_08h_20h_value,skycon_20h_32h_value,skycon_value,temperature_min,temperature_max,temperature_avg,visibility_min,visibility_max,visibility_avg,wind_min_direction,wind_max_direction,wind_avg_direction,
+        wind_min_speed,wind_max_speed,wind_avg_speed
+        )
+        values
+        <foreach collection="list" item="line" separator=",">
+            (
+            #{line.id},#{line.stationId},#{line.zxrq},#{line.cjsj},#{line.ycsj},#{line.air_quality_aqi_min_chn},#{line.air_quality_aqi_max_chn},#{line.air_quality_aqi_avg_chn},#{line.air_quality_aqi_min_usa},#{line.air_quality_aqi_max_usa},#{line.air_quality_aqi_avg_usa},
+            #{line.air_quality_pm25_min},#{line.air_quality_pm25_max},#{line.air_quality_pm25_avg},#{line.astro_sunrise_time},#{line.astro_sunset_time},#{line.cloudrate_min},#{line.cloudrate_max},#{line.cloudrate_avg},#{line.dswrf_min},#{line.dswrf_max},#{line.dswrf_avg},
+            #{line.humidity_min},#{line.humidity_max},#{line.humidity_avg},#{line.life_index_comfort_index},#{line.life_index_comfort_desc},#{line.life_index_carWashing_index},#{line.life_index_carWashing_desc},#{line.life_index_coldRisk_index},#{line.life_index_coldRisk_desc},
+            #{line.life_index_ultraviolet_index},#{line.life_index_ultraviolet_desc},#{line.life_index_dressing_index},#{line.life_index_dressing_desc},#{line.pressure_min},#{line.pressure_max},#{line.pressure_avg},#{line.precipitation_min},#{line.precipitation_max},#{line.precipitation_avg},
+            #{line.skycon_08h_20h_value},#{line.skycon_20h_32h_value},#{line.skycon_value},#{line.temperature_min},#{line.temperature_max},#{line.temperature_avg},#{line.visibility_min},#{line.visibility_max},#{line.visibility_avg},#{line.wind_min_direction},#{line.wind_max_direction},#{line.wind_avg_direction},
+            #{line.wind_min_speed},#{line.wind_max_speed},#{line.wind_avg_speed}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteDayYcsj" parameterType="string">
+        delete from t_caiyun_ycsj_day where cjsj &lt;= #{date}
+    </delete>
+
+    <select id="queryDayYcsj" resultType="Map">
+        select * from t_caiyun_ycsj_day
+        where 1=1
+        <if test="siteId != null"> and stationId = #{siteId}</if>
+        <if test="startTime != null"> and zxrq &gt;= #{startTime}</if>
+        <if test="endTime != null"> and zxrq &lt;= #{endTime}</if>
+    </select>
+
+</mapper>

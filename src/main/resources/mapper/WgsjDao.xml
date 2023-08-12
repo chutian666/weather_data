@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scboanda.demo.dao.WgsjDao">
+
+    <insert id="insertWgsj" parameterType="java.util.Map">
+        insert into t_caiyun_wgsjlog(id,fileName,url,createTime,remarks,fileDateTime,newFileDateTime)
+        values
+        (
+        #{id},
+        #{fileName},
+        #{url},
+        #{createTime},
+        #{remarks},
+        #{fileDateTime},
+        #{newFileDateTime}
+        )
+    </insert>
+
+    <delete id="deleleWgsj" parameterType="string">
+        delete from t_caiyun_wgsjlog where remarks is null
+    </delete>
+
+    <select id="findWgsj" resultType="java.util.Map">
+        select * from  t_caiyun_wgsjlog where id = #{id}
+    </select>
+
+    <select id="getZd"  resultType="java.util.Map">
+        SELECT * FROM t_caiyun_zd
+    </select>
+
+</mapper>

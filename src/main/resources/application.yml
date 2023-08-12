@@ -1,0 +1,24 @@
+server:
+  port: 8091
+
+adminPath: /integration
+
+spring:
+  schedule:
+    enable: true
+  datasource:
+      name: u_weather_cy  #数据库名
+      url: jdbc:mysql://192.168.3.233:3306/u_weather_cy?useSSL=false&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: PowerSmart2022
+      driver-class-name: com.mysql.jdbc.Driver
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  file:
+    path: logs
+
